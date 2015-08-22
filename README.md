@@ -27,46 +27,30 @@ $ sudo mv composer.phar /usr/local/bin/composer
 Veja mais detalhes em https://getcomposer.org/download/
 
 
-### 3 - Configure a conexão com o banco de dados
+### 3 - Instale o projeto
 
-Renomeie o arquivo webapp/config/app.sample.php para webapp/config/app.php
+Na raiz do projeto, coloque o arquivo cria_banco.sh como executável:
 
-
-### 4 - Instale todas as dependências do projeto:
-```sh
-$ cd webapp
-$ composer install --prefer-dist
-```
-Crie as pastas tmp e logs dentro de webapp.
-```sh
-$ mkdir tmp logs
-$ chmod 777 tmp logs
-```
-Veja mais detalhes em http://book.cakephp.org/3.0/pt/installation.html
-
-### 5 - Suba o servidor 
-Em outra aba do terminal, execute o seguinte comando dentro da pasta webapp e deixe o servidor rodando.
-```sh
-$ bin/cake server
-```
-O projeto ficara disponível em http://localhost:8765
-
-
-### 6 - Popule o banco de dados
-
-Entre na pasta webapp/database e coloque o arquivo cria_banco.sh como executável:
 ```sh
 $ chmod +x cria_banco.sh
 ```
-Depois execute:
+
+Execute a instalação.
+
 ```sh
-$ sh cria_banco.sh
+$ composer install --prefer-dist
 ```
 
 Em uma outra aba do terminal, você pode acompanhar o processo:
 ```sh
-$ tail -f webapp/logs/access.log
+$ tail -f storage/logs/laravel.log
 ```
 
-### 7 - Acesse o sistema
+### 4 - Suba o servidor e acesse o sistema
+
+Acesse a pasta assembleia/public e suba o servidor.
+
+```sh
+$ php -S localhost:8765
+```
 Acesse a página inicial em http://localhost:8765
