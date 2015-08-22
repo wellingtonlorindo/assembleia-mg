@@ -12,7 +12,7 @@ class CriaTabelasDeputadoETipoDespesaEVerbaIndenizatoria extends Migration
      */
     public function up()
     {
-        Schema::create('deputado', function(Blueprint $table)
+        Schema::create('deputados', function(Blueprint $table)
         {
             $table->increments('id');
             $table->string('nome')->default('');
@@ -20,18 +20,18 @@ class CriaTabelasDeputadoETipoDespesaEVerbaIndenizatoria extends Migration
             $table->timestamps();
         });
  
-        Schema::create('tipo_despesa', function(Blueprint $table) {
+        Schema::create('tipos_despesas', function(Blueprint $table) {
             $table->increments('codTipoDespesa');
             $table->text('descTipoDespesa')->default('');
             $table->timestamps();
         });
 
-        Schema::create('verba_indenizatoria', function(Blueprint $table) {
+        Schema::create('verbas_indenizatorias', function(Blueprint $table) {
             $table->increments('idVerba');
             $table->integer('idDeputado')->unsigned()->default(0);
-            $table->foreign('idDeputado')->references('id')->on('deputado')->onDelete('cascade');
+            $table->foreign('idDeputado')->references('id')->on('deputados')->onDelete('cascade');
             $table->integer('codTipoDespesa')->unsigned()->default(0);
-            $table->foreign('codTipoDespesa')->references('codTipoDespesa')->on('tipo_despesa')->onDelete('cascade');
+            $table->foreign('codTipoDespesa')->references('codTipoDespesa')->on('tipos_despesas')->onDelete('cascade');
             $table->text('dataReferencia')->default('');
             $table->numeric('valor')->default('');
             $table->timestamps();
@@ -45,8 +45,8 @@ class CriaTabelasDeputadoETipoDespesaEVerbaIndenizatoria extends Migration
      */
     public function down()
     {
-        Schema::drop('deputado');
-        Schema::drop('tipo_despesa');
-        Schema::drop('verba_indenizatoria');
+        Schema::drop('deputados');
+        Schema::drop('tipos_despesas');
+        Schema::drop('verbas_indenizatorias');
     }
 }

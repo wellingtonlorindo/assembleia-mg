@@ -9,12 +9,26 @@ class PopulaBancoSeeder extends Seeder {
     public function run()
     {
         // Limpa o banco antes de popular
-        DB::table('deputado')->delete();
-        DB::table('tipo_despesa')->delete();
-        DB::table('verba_indenizatoria')->delete();
- 
-        $deputados = $this->buscarDeputadosPorLegislatura();
-        $this->salvarDadosDeputados($deputados);
+        DB::table('deputados')->delete();
+        DB::table('tipos_despesas')->delete();
+        DB::table('verbas_indenizatorias')->delete();
+
+        // inicia a transação
+        DB::beginTransaction();
+
+        try {
+
+            $deputados = $this->buscarDeputadosPorLegislatura();
+            // salva os dados dos deputados
+            $this->salvarDadosDeputados($deputados);
+            DB::commit();
+            Log::info('O banco foi populado com sucesso!');
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::info('-- Ocorreu um erro. Desfazendo alterações... - '.$e->getMessage());
+            throw new \Exception('Ocorreu um erro - '.$e->getMessage());            
+        } 
     }
 
     /**
@@ -60,14 +74,11 @@ class PopulaBancoSeeder extends Seeder {
      */
     public function salvarDadosDeputados(Array $deputados)
     {
-        // inicia a transação
-        DB::beginTransaction();
-
         foreach ($deputados as $deputado) {
+           
+            $deputado = $this->removerColunasDesnecessarias('deputados', $deputado);
 
-            $deputado = $this->removerColunasDesnecessarias('deputado', $deputado);
-
-            DB::table('deputado')->insert([$deputado]);
+            DB::table('deputados')->insert([$deputado]);
 
             // salva o deputado
             Log::info('-- Salvando deputado  '.$deputado['nome']);
@@ -81,11 +92,9 @@ class PopulaBancoSeeder extends Seeder {
             }
 
             // Salva as despesas do deputado
-            $this->salvarVerbaDeputado($verbasDeputado);
+            $this->salvarVerbaDeputado($verbasDeputado);                       
         }
 
-        DB::commit();
-        Log::info('O banco foi populado com sucesso!');
     }
 
 
@@ -124,8 +133,8 @@ class PopulaBancoSeeder extends Seeder {
             
             // salva a Verba
             Log::info('---- Salvando despesa '.$verba['descTipoDespesa']);
-            $verba = $this->removerColunasDesnecessarias('verba_indenizatoria', $verba);
-            DB::table('verba_indenizatoria')->insert([$verba]);
+            $verba = $this->removerColunasDesnecessarias('verbas_indenizatorias', $verba);
+            DB::table('verbas_indenizatorias')->insert([$verba]);
         }
 
     }
@@ -137,7 +146,7 @@ class PopulaBancoSeeder extends Seeder {
      */
     public function salvarTipoDespesa(Array $tipoDespesa)
     {
-        $tableTipoDespesa = DB::table('tipo_despesa');
+        $tableTipoDespesa = DB::table('tipos_despesas');
         $despesaJaExiste = $tableTipoDespesa->where('codTipoDespesa', $tipoDespesa['codTipoDespesa'])
             ->first();
 
