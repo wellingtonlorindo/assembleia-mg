@@ -4,6 +4,8 @@ cat assembleia/storage/databases/assembleia.sql | sqlite3 assembleia/storage/dat
 
 cd assembleia
 
+php artisan migrate
+
 composer dump-autoload
 
 php artisan db:seed

@@ -1,8 +1,11 @@
 <?php
  
 use Illuminate\Database\Seeder;
-use App\Library\AssembleiaWs;
+use App\Services\AssembleiaWs;
 use App\Library\Utils;
+use App\Deputado;
+use App\VerbasIndenizatoria;
+use App\TiposDespesa;
  
 class PopulaBancoSeeder extends Seeder {
  
@@ -78,10 +81,12 @@ class PopulaBancoSeeder extends Seeder {
            
             $deputado = $this->removerColunasDesnecessarias('deputados', $deputado);
 
-            DB::table('deputados')->insert([$deputado]);
+            $objDeputado = Deputado::getModel('');
 
             // salva o deputado
             Log::info('-- Salvando deputado  '.$deputado['nome']);
+            $objDeputado->create($deputado);
+
 
             // busca as verbas do deputado
             $verbasDeputado = $this->buscarVerbaDeputado($deputado['id']);
@@ -134,7 +139,9 @@ class PopulaBancoSeeder extends Seeder {
             // salva a Verba
             Log::info('---- Salvando despesa '.$verba['descTipoDespesa']);
             $verba = $this->removerColunasDesnecessarias('verbas_indenizatorias', $verba);
-            DB::table('verbas_indenizatorias')->insert([$verba]);
+            
+            $objVerba = VerbasIndenizatoria::getModel();
+            $objVerba->create($verba);
         }
 
     }
