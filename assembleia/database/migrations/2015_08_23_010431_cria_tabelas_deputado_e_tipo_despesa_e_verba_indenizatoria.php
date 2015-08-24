@@ -27,7 +27,7 @@ class CriaTabelasDeputadoETipoDespesaEVerbaIndenizatoria extends Migration
             $table->integer('codTipoDespesa')->unsigned()->default(0);
             $table->foreign('codTipoDespesa')->references('codTipoDespesa')->on('tipos_despesas')->onDelete('cascade');
             $table->text('dataReferencia')->default('');
-            $table->numeric('valor')->default('');
+            $table->float('valor')->default('');
             $table->timestamps();
         });
     }
