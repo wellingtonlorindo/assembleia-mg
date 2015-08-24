@@ -19,12 +19,6 @@ class CriaTabelasDeputadoETipoDespesaEVerbaIndenizatoria extends Migration
             $table->string('partido')->default('');
             $table->timestamps();
         });
- 
-        Schema::create('tipos_despesas', function(Blueprint $table) {
-            $table->increments('codTipoDespesa');
-            $table->text('descTipoDespesa')->default('');
-            $table->timestamps();
-        });
 
         Schema::create('verbas_indenizatorias', function(Blueprint $table) {
             $table->increments('idVerba');
