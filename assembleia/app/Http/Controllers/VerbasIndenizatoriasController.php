@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Services\VerbasIndenizatorias;
+use App\Services\Deputados;
+use App\Services\TiposDespesas;
 
 class VerbasIndenizatoriasController extends Controller
 {
@@ -17,13 +20,10 @@ class VerbasIndenizatoriasController extends Controller
      */
     public function index()
     {
-        /*$serviceVerbaIndenizatoria = $this->Service->get('VerbaIndenizatoria');
+        $serviceVerbaIndenizatoria = VerbasIndenizatorias::getService();
         $totalAnualPorCategoria = $serviceVerbaIndenizatoria->buscarTotalAnualPorCategoria();
-
-        $serviceTipoDespesa = $this->Service->get('TipoDespesa');
-        $tiposDespesa = $serviceTipoDespesa->selectFormat('descTipoDespesa');
-
-        $this->set(compact('totalAnualPorCategoria', 'tiposDespesa'));*/
+        
+        return view('verbas_indenizatorias.index', compact('totalAnualPorCategoria'));
     }
 
     /**
@@ -35,12 +35,10 @@ class VerbasIndenizatoriasController extends Controller
      */
     public function topCincoDeputadosCategoria($codTipoDespesa)
     {
-        /*$serviceDeputado = $this->Service->get('Deputado');
+        $serviceDeputado = Deputados::getService();;
         $topDeputados = $serviceDeputado->buscarTopDeputadosPorDespesa($codTipoDespesa);
-        
-        $serviceTipoDespesa = $this->Service->get('TipoDespesa');
-        $tiposDespesa = $serviceTipoDespesa->selectFormat('descTipoDespesa');
 
-        $this->set(compact('topDeputados', 'tiposDespesa', 'codTipoDespesa'));*/
+        return view('verbas_indenizatorias.top_cinco_deputados_categoria', ['topDeputados' => $topDeputados]);
+
     }
 }

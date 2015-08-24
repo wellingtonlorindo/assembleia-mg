@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'VerbasIndenizatoriasController@index');
 
 Route::resource('verbasIndenizatorias', 'VerbasIndenizatoriasController');
+
+Route::get('topCincoDeputadosCategoria/{id}', 'VerbasIndenizatoriasController@topCincoDeputadosCategoria');
