@@ -43,8 +43,8 @@ $ composer install --prefer-dist
 
 Em uma outra aba do terminal, você pode acompanhar o processo:
 ```sh
-$ tail -f storage/logs/laravel.log
-```
+$ tail -f assembleia/storage/logs/laravel.log
+``` 
 
 ### 4 - Suba o servidor e acesse o sistema
 
