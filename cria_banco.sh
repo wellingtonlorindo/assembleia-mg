@@ -4,6 +4,12 @@ cat assembleia/storage/databases/assembleia.sql | sqlite3 assembleia/storage/dat
 
 cd assembleia
 
+cp .env.example .env
+
+composer install --prefer-dist
+
+php artisan key:generate
+
 php artisan migrate
 
 composer dump-autoload

@@ -48,9 +48,9 @@ $ tail -f storage/logs/laravel.log
 
 ### 4 - Suba o servidor e acesse o sistema
 
-Acesse a pasta assembleia/public e suba o servidor.
+Suba o servidor dentro da pasta assembleia.
 
 ```sh
-$ php -S localhost:8765
+$ php artisan serve
 ```
-Acesse a página inicial em http://localhost:8765
+Acesse a página inicial em http://localhost:8000
