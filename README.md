@@ -1,6 +1,6 @@
 # Dados da Assembléia Legislativa MG 
 
-Consume os dados abertos da Assembléia Legislativa do Estado de Minas
+Consome os dados abertos da Assembléia Legislativa do Estado de Minas
 Gerais e armazena em um banco de dados SQLite.
 
 ## Instalação
