@@ -1,13 +1,12 @@
-# Dados da Assembléia Legislativa MG 
+# Legislative Assembly of Minas Gerais
 
-Consome os dados abertos da Assembléia Legislativa do Estado de Minas
-Gerais e armazena em um banco de dados SQLite.
+This project consumes open data from the Legislative Assembly of the State of Minas Gerais and stores it in an SQLite database.
 
-## Instalação
+## Installation
 
-O projeto está configurado para rodar em ambiente Linux. Após clonar o projeto, siga os passos abaixo.
+The project is configured to run in a Linux environment. After cloning the project, follow the steps below.
 
-### 1 - Instale as bibliotecas necessárias. 
+### 1 - Install the Required Libraries
 
 - PHP >= 5.5.9
 - OpenSSL PHP Extension
@@ -16,41 +15,42 @@ O projeto está configurado para rodar em ambiente Linux. Após clonar o projeto
 - Tokenizer PHP Extension
 - SQLITE 3
 
-Veja mais detalhes em http://laravel.com/docs/5.1#installation
+For more details, see http://laravel.com/docs/5.1#installation
 
-### 2 - Instale o composer
+### 2 - Install Composer
 
 ```sh
 $ curl -sS https://getcomposer.org/installer | php
 $ sudo mv composer.phar /usr/local/bin/composer
 ```
-Veja mais detalhes em https://getcomposer.org/download/
+For more details, see https://getcomposer.org/download/
 
 
-### 3 - Instale o projeto
+### 3 - Install the Project
 
-Na raiz do projeto, coloque o arquivo cria_banco.sh como executável:
+In the root of the project, make the cria_banco.sh file executable:
 
 ```sh
 $ chmod +x cria_banco.sh
 ```
 
-Execute a instalação.
+Run the installation process:
 
 ```sh
 $ composer install --prefer-dist
 ```
 
-Em uma outra aba do terminal, você pode acompanhar o processo:
+In another terminal tab, you can monitor the process with:
+
 ```sh
 $ tail -f assembleia/storage/logs/laravel.log
 ``` 
 
-### 4 - Suba o servidor e acesse o sistema
+### 4 - Start the Server and Access the System
 
-Suba o servidor dentro da pasta assembleia.
+Start the server inside the assembleia folder:
 
 ```sh
 $ php artisan serve
 ```
-Acesse a página inicial em http://localhost:8000
+Access the home page at http://localhost:8000
